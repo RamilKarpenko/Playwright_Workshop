@@ -11,7 +11,7 @@
         {
             await Page.GotoAsync("https://testpages.eviltester.com/");
             // wait for specific url
-            await Page.WaitForURLAsync("**/styled/index.html");
+            await Page.WaitForURLAsync("**/styled/*");
         }
 
         //https://playwright.dev/dotnet/docs/api/class-locator#locator-wait-for
@@ -21,7 +21,7 @@
             ILocator messagesPageLink = Page.Locator("#xhttpmessages");
 
             // wait for specific element to be visible (default), timeout = 30s (default)
-            await messagesPageLink.WaitForAsync(new() { State = WaitForSelectorState.Visible });
+            await messagesPageLink.WaitForAsync(new() { State = WaitForSelectorState.Detached });
 
             await messagesPageLink.ClickAsync();
             await Page.WaitForLoadStateAsync(LoadState.Load);
@@ -35,9 +35,13 @@
             await Page.RunAndWaitForResponseAsync(async () =>
             {
                 await Page.ReloadAsync();
+                
             }, "https://testpages.eviltester.com/styled/sync/messageset02.json");
 
-            await Page.WaitForRequestAsync("https://testpages.eviltester.com/styled/sync/messageset02.json");
+            await Page.WaitForResponseAsync("https://testpages.eviltester.com/styled/sync/messageset01.json");
+
+            var wait = Page.WaitForRequestAsync("https://testpages.eviltester.com/styled/sync/messageset02.json");
+
             //wait by predicate
             var request = await Page.WaitForRequestAsync((request) => 
             { return request.Url == "https://testpages.eviltester.com/styled/sync/messageset01.json" && request.Method == "GET"; });
@@ -47,7 +51,7 @@
             await Page.WaitForRequestFinishedAsync(new() { Predicate = 
                 request => request.Url == "https://testpages.eviltester.com/styled/sync/messageset02.json" });
 
-            await Page.WaitForResponseAsync("https://testpages.eviltester.com/styled/sync/messageset01.json");
+            
 
             
         }
