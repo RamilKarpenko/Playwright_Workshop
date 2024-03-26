@@ -6,4 +6,4 @@ Install the <a href="https://playwright.dev/dotnet/docs/browsers">browsers</a>: 
 <p></p>
 Run the tests using the <code>dotnet test</code> command, and also take a look at <a href="https://playwright.dev/dotnet/docs/running-tests">this page</a> for more information 
 <p></p>
-To use the <code>.runsettings</code> configuration file, specify its file with the <code>--settings:example.runsettings flag</code>
+To use the <code>.runsettings</code> configuration file, specify its name with the <code>--settings:example.runsettings flag</code>
