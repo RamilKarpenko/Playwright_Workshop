@@ -1,4 +1,4 @@
-﻿namespace PlaywrightWorkshop
+﻿namespace PlaywrightWorkshop.FirstWorkshop
 {
     [Parallelizable(ParallelScope.Self)]
     [TestFixture]
@@ -25,7 +25,7 @@
             ILocator pageHeader = Page.Locator(".heading");
 
             await Page.GotoAsync("https://the-internet.herokuapp.com/");
-            
+
             ILocator addRemoveLink = Page.Locator("//a[@href='/add_remove_elements/']");
             ILocator dropdownLink = Page.GetByText("Dropdown");
             Console.WriteLine(await pageHeader.TextContentAsync());

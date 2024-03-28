@@ -1,4 +1,4 @@
-namespace PlaywrightWorkshop;
+namespace PlaywrightWorkshop.FirstWorkshop;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]

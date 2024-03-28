@@ -1,4 +1,4 @@
-﻿namespace PlaywrightWorkshop
+﻿namespace PlaywrightWorkshop.FirstWorkshop
 {
     [Parallelizable(ParallelScope.Self)]
     [TestFixture]
@@ -35,7 +35,7 @@
             await Page.RunAndWaitForResponseAsync(async () =>
             {
                 await Page.ReloadAsync();
-                
+
             }, "https://testpages.eviltester.com/styled/sync/messageset02.json");
 
             await Page.WaitForResponseAsync("https://testpages.eviltester.com/styled/sync/messageset01.json");
@@ -43,17 +43,20 @@
             var wait = Page.WaitForRequestAsync("https://testpages.eviltester.com/styled/sync/messageset02.json");
 
             //wait by predicate
-            var request = await Page.WaitForRequestAsync((request) => 
+            var request = await Page.WaitForRequestAsync((request) =>
             { return request.Url == "https://testpages.eviltester.com/styled/sync/messageset01.json" && request.Method == "GET"; });
 
             Console.WriteLine(request.Url);
 
-            await Page.WaitForRequestFinishedAsync(new() { Predicate = 
-                request => request.Url == "https://testpages.eviltester.com/styled/sync/messageset02.json" });
+            await Page.WaitForRequestFinishedAsync(new()
+            {
+                Predicate =
+                request => request.Url == "https://testpages.eviltester.com/styled/sync/messageset02.json"
+            });
 
-            
 
-            
+
+
         }
 
         [Test]
@@ -65,7 +68,7 @@
             await Page.EvaluateAsync("console.log('General', 'Kenobi')");
             // wait for event, and store results
             IConsoleMessage message = await messageWait;
-            Console.WriteLine("Hello, there!\n{0} {1}!", await message.Args[0].JsonValueAsync<String>(), await message.Args[1].JsonValueAsync<String>());
+            Console.WriteLine("Hello, there!\n{0} {1}!", await message.Args[0].JsonValueAsync<string>(), await message.Args[1].JsonValueAsync<string>());
         }
 
         [Test]
